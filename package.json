@@ -1,0 +1,24 @@
+{
+  "name": "codevault",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VanshWebDevloper/CodeVault.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/VanshWebDevloper/CodeVault/issues"
+  },
+  "homepage": "https://github.com/VanshWebDevloper/CodeVault#readme",
+  "dependencies": {
+    "sql.js": "^1.14.2"
+  }
+}
