@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Notes</title>
-
-  <link rel="stylesheet" href="css/notes.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes</title>
+<link rel="stylesheet" href="css/notes.css">
 </head>
-
 <body>
 
-  <main class="notes-container">
+<div class="app">
 
-    <header class="notes-header">
+  <header class="top">
+    <div>
       <h1>Notes</h1>
-      <p>Simple n Easy to note you every notes :)</p>
-    </header>
+      <p class="tagline">Simple and easy — note it down before it slips away.</p>
+    </div>
+    <div class="account">
+      <div class="who" id="whoLabel">Not signed in</div>
+      <button id="authBtn" type="button">Sign in</button>
+    </div>
+  </header>
 
-    <section class="notes-editor">
-      <form>
-        <label for="note">Write your note</label>
+  <section class="search-row">
+    <input
+      type="text"
+      id="searchNote"
+      name="searchNote"
+      placeholder="Search your notes by name"
+      autocomplete="off"
+    >
+  </section>
 
-        <textarea
-          id="note"
-          name="note"
-          required
-          placeholder="Note n keep track of your trash ideas :) dont mind"
-        ></textarea>
+  <section class="editor">
+    <form id="noteForm">
+      <label for="nameNote">Title</label>
+      <input
+        type="text"
+        id="nameNote"
+        name="nameNote"
+        placeholder="Give it a name"
+        autocomplete="off"
+        required
+      >
 
-        <button type="submit">
-          Are you done ? Click me then :)
-        </button>
-      </form>
-    </section>
+      <label for="note">Note</label>
+      <textarea
+        id="note"
+        name="note"
+        placeholder="Write it down your trash ideas :) dont mind /j"
+        required
+      ></textarea>
 
-    <div class="notesList"></div>
-    
-  </main>
+      <div class="editor-actions">
+        <span class="hint" id="editHint"></span>
+        <button type="submit" class="primary" id="saveBtn">Save note</button>
+      </div>
+    </form>
+  </section>
 
-  <script src="js/notes.js"></script>
+  <div class="notesList" id="notesList"></div>
+
+  <p class="storage-note">
+    Notes are saved to this browser only, under your current account name.
+    Sign in is a placeholder for now — no data leaves your device yet.
+  </p>
+
+</div>
+
+<script src="js/notes.js"></script>
 
 </body>
 </html>
