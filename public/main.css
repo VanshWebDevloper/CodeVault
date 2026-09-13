@@ -14,7 +14,7 @@ body {
 .desktop {
   height: calc(100vh - 60px);
   width: 100%;
-  background-image: url("../assets/wallpaper.jpg");
+  background-image: url("assets/wallpaper.jpg");
   background-size: cover;
   background-position: center;
   padding: 30px;
