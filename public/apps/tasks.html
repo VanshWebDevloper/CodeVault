@@ -10,18 +10,65 @@
 <body>
 
   <main>
-    <h1>Tasks</h1>
-    <p>Add, remove or edit your tasks</p>
 
-    <form id="taskForm">
-      <textarea id="taskInput" minlength="4" maxlength="50" required
-        placeholder="What do you need to do?"></textarea>
-      <button type="submit">Add Task</button>
-    </form>
+    <header class="top">
+      <div>
+        <h1>Tasks</h1>
+        <p class="tagline">Add, remove, or edit your tasks.</p>
+      </div>
+      <div class="account">
+        <div class="who" id="whoLabel">Not signed in</div>
+        <button id="authBtn" type="button">Sign in</button>
+      </div>
+    </header>
 
-    <h2>Your Tasks</h2>
+    <section class="search-row">
+      <input
+        type="text"
+        id="searchTask"
+        name="searchTask"
+        placeholder="Search your tasks by name"
+        autocomplete="off"
+      >
+    </section>
+
+    <section class="editor">
+      <form id="taskForm">
+        <label for="taskName">Task name</label>
+        <input
+          type="text"
+          id="taskName"
+          name="taskName"
+          placeholder="Give it a name"
+          autocomplete="off"
+          required
+        >
+
+        <label for="taskInput">Details</label>
+        <textarea
+          id="taskInput"
+          name="taskInput"
+          minlength="4"
+          required
+          placeholder="What do you need to do?"
+        ></textarea>
+
+        <div class="editor-actions">
+          <span class="hint" id="editHint"></span>
+          <button type="submit" class="primary" id="saveBtn">Add task</button>
+        </div>
+      </form>
+    </section>
+
+    <h2>Your tasks</h2>
 
     <div id="taskList"></div>
+
+    <p class="storage-note">
+      Tasks are saved to this browser only, under your current account name.
+      Sign in is a placeholder for now — no data leaves your device yet.
+    </p>
+
   </main>
 
   <script src="js/tasks.js"></script>
