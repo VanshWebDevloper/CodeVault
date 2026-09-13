@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code-Editor</title>
+  <link rel="stylesheet" href="css/editor.css">
+
+  <!-- CodeMirror: real syntax highlighting engine -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+</head>
+<body>
+
+  <div class="code-editor">
+
+    <!-- Top command bar -->
+    <div class="top-panel">
+      <button id="menu-btn" class="menu-btn">☰</button>
+      <div class="command-panel">Search Commands</div>
+      <button id="run-btn" class="run-btn">▶ Run</button>
+    </div>
+
+    <div class="workspace">
+
+      <!-- Activity bar -->
+      <div class="activity-bar">
+        <div class="activity-icon active" data-panel="explorer">📁</div>
+        <div class="activity-icon" data-panel="extensions">🧩</div>
+      </div>
+
+      <!-- File explorer -->
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-title">Explorer</div>
+        <ul class="file-tree" id="file-tree">
+          <!-- filled by js -->
+        </ul>
+      </div>
+
+      <!-- Extensions panel (hidden by default) -->
+      <div class="sidebar extensions-panel hidden" id="extensions-panel">
+        <div class="sidebar-title">Extensions</div>
+        <div class="ext-item">
+          <label><input type="checkbox" id="ext-wordwrap"> Word Wrap</label>
+        </div>
+        <div class="ext-item">
+          <label><input type="checkbox" id="ext-minimap"> Show Line Numbers</label>
+        </div>
+        <div class="ext-item">
+          <label>Theme
+            <select id="ext-theme">
+              <option value="dracula">Dracula</option>
+              <option value="default">Light</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+      <div class="resize-handle" id="resize-handle"></div>
+
+      <!-- Editor + output split -->
+      <div class="editor-output-split" id="editor-output-split">
+
+        <div class="editor" id="editor-pane">
+          <div class="tab-bar" id="tab-bar">
+            <!-- filled by js -->
+          </div>
+          <div class="codespace" id="codespace"></div>
+        </div>
+
+        <div class="v-resize-handle" id="v-resize-handle"></div>
+
+        <div class="output-pane" id="output-pane">
+          <div class="output-header">
+            Output
+            <button id="clear-console" class="clear-btn">Clear</button>
+          </div>
+          <iframe id="output-frame" sandbox="allow-scripts allow-modals"></iframe>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <span id="status-file">index.html</span>
+      <span id="status-lang">HTML</span>
+      <span id="status-pos">Ln 1, Col 1</span>
+    </div>
+
+  </div>
+
+  <!-- CodeMirror core + language modes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+
+  <script src="js/editor.js"></script>
+</body>
+</html>

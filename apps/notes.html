@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Notes</title>
+
+  <link rel="stylesheet" href="css/notes.css">
+</head>
+
+<body>
+
+  <main class="notes-container">
+
+    <header class="notes-header">
+      <h1>Notes</h1>
+      <p>Simple n Easy to note you every notes :)</p>
+    </header>
+
+    <section class="notes-editor">
+      <form>
+        <label for="note">Write your note</label>
+
+        <textarea
+          id="note"
+          name="note"
+          required
+          placeholder="Note n keep track of your trash ideas :) dont mind"
+        ></textarea>
+
+        <button type="submit">
+          Are you done ? Click me then :)
+        </button>
+      </form>
+    </section>
+
+    <div class="notesList"></div>
+    
+  </main>
+
+  <script src="js/notes.js"></script>
+
+</body>
+</html>
