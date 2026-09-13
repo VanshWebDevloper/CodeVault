@@ -1,0 +1,460 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: #1e1e1e;
+  color: #cccccc;
+  font-size: 13px;
+  -webkit-text-size-adjust: 100%;
+}
+
+.code-editor {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+
+.top-panel {
+  position: relative;
+  height: 38px;
+  background-color: #323233;
+  border-bottom: 1px solid #1e1e1e;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.command-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1e1e1e;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: #858585;
+  width: 260px;
+  max-width: 40vw;
+  text-align: center;
+  cursor: text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.command-panel:hover {
+  border-color: #6b6b6b;
+}
+
+.run-btn {
+  margin-left: auto;
+  margin-right: 12px;
+  background-color: #0e639c;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.run-btn:hover {
+  background-color: #1177bb;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #cccccc;
+  font-size: 20px;
+  padding: 0 12px;
+  cursor: pointer;
+  height: 100%;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+/* Workspace row */
+
+.workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Activity bar */
+
+.activity-bar {
+  width: 48px;
+  background-color: #333333;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+  gap: 4px;
+}
+
+.activity-icon {
+  width: 48px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  opacity: 0.6;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+}
+
+.activity-icon:hover {
+  opacity: 1;
+}
+
+.activity-icon.active {
+  opacity: 1;
+  border-left: 2px solid #ffffff;
+}
+
+/* File explorer sidebar */
+
+.sidebar {
+  width: 220px;
+  background-color: #252526;
+  border-right: 1px solid #1e1e1e;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar.hidden {
+  display: none;
+}
+
+.sidebar-title {
+  padding: 10px 16px 6px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #bbbbbb;
+}
+
+.file-tree {
+  list-style: none;
+}
+
+.file-tree li {
+  padding: 3px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.file-tree li:hover {
+  background-color: #2a2d2e;
+}
+
+.file-tree li.active-file {
+  background-color: #37373d;
+  color: #ffffff;
+}
+
+/* Extensions panel */
+
+.ext-item {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.ext-item select {
+  background-color: #3c3c3c;
+  color: #cccccc;
+  border: 1px solid #555;
+  padding: 2px 4px;
+  margin-left: 6px;
+}
+
+/* Resize handle between sidebar and editor */
+
+.resize-handle {
+  width: 4px;
+  cursor: col-resize;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.resize-handle:hover,
+.resize-handle.dragging {
+  background-color: #007acc;
+}
+
+/* Editor + output split container */
+
+.editor-output-split {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+  min-height: 80px;
+}
+
+.tab-bar {
+  display: flex;
+  background-color: #252526;
+  border-bottom: 1px solid #1e1e1e;
+  flex-shrink: 0;
+}
+
+.tab {
+  padding: 8px 14px;
+  font-size: 13px;
+  color: #969696;
+  background-color: #2d2d2d;
+  border-right: 1px solid #1e1e1e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab.active {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-top: 1px solid #007acc;
+}
+
+.tab .tab-close {
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+.tab .tab-close:hover {
+  opacity: 1;
+}
+
+.codespace {
+  flex: 1;
+  overflow: hidden;
+}
+
+.CodeMirror {
+  height: 100%;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 14px;
+}
+
+/* Horizontal resize handle between editor and output */
+
+.v-resize-handle {
+  height: 4px;
+  cursor: row-resize;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.v-resize-handle:hover,
+.v-resize-handle.dragging {
+  background-color: #007acc;
+}
+
+/* Output pane */
+
+.output-pane {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.output-header {
+  height: 26px;
+  background-color: #252526;
+  color: #cccccc;
+  font-size: 11px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.clear-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid #555;
+  color: #cccccc;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background-color: #3c3c3c;
+}
+
+#output-frame {
+  flex: 1;
+  border: none;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* Status bar */
+
+.status-bar {
+  height: 22px;
+  background-color: #007acc;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 12px;
+  font-size: 12px;
+  flex-shrink: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ===================== TABLET ===================== */
+@media (max-width: 900px) {
+  .sidebar,
+  .extensions-panel {
+    width: 180px !important;
+  }
+
+  .output-pane {
+    height: 160px;
+  }
+}
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 640px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .command-panel {
+    max-width: 45vw;
+    font-size: 11px;
+  }
+
+  .run-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  /* Activity bar becomes a slim strip, sidebar becomes an overlay drawer */
+  .activity-bar {
+    width: 40px;
+  }
+
+  .activity-icon {
+    width: 40px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .sidebar,
+  .extensions-panel {
+    position: fixed;
+    top: 38px;
+    left: 40px;
+    bottom: 22px;
+    width: 70vw !important;
+    max-width: 260px;
+    z-index: 20;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.5);
+    transform: translateX(-110%);
+    transition: transform 0.2s ease;
+  }
+
+  .sidebar.mobile-open,
+  .extensions-panel.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* Backdrop so tapping outside the drawer closes it */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 38px;
+    left: 0;
+    right: 0;
+    bottom: 22px;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 15;
+  }
+
+  .sidebar-backdrop.visible {
+    display: block;
+  }
+
+  /* Resize handles are unreliable with touch: hide and use fixed sizes instead */
+  .resize-handle {
+    display: none;
+  }
+
+  .v-resize-handle {
+    height: 10px;
+  }
+
+  .tab {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .tab .tab-close {
+    font-size: 14px;
+    padding: 2px;
+  }
+
+  .codespace .CodeMirror {
+    font-size: 13px;
+  }
+
+  .output-pane {
+    height: 35vh;
+  }
+
+  .status-bar span:nth-child(2) {
+    display: none; /* drop UTF-8 label, keep branch + cursor pos */
+  }
+}
+
+/* Extra-narrow phones */
+@media (max-width: 380px) {
+  .status-bar span:nth-child(1) {
+    display: none;
+  }
+
+  .run-btn {
+    padding: 5px 8px;
+  }
+}

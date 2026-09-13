@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="css/tasks.css">
+</head>
+
+<body>
+
+  <main>
+    <h1>Tasks</h1>
+    <p>Add, remove or edit your tasks</p>
+
+    <form id="taskForm">
+      <textarea id="taskInput" minlength="4" maxlength="50" required
+        placeholder="What do you need to do?"></textarea>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Your Tasks</h2>
+
+    <div id="taskList"></div>
+  </main>
+
+  <script src="js/tasks.js"></script>
+</body>
+</html>
