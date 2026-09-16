@@ -115,6 +115,7 @@
   /* ---------- Events ---------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    const wasEditing = !!editingId;
     const name = nameInput.value.trim();
     const body = bodyInput.value.trim();
     if (!name || !body) return;
@@ -139,6 +140,9 @@
       });
     }
 
+    if (window.ANALYTICS) {
+      ANALYTICS.logEvent(wasEditing ? "note_updated" : "note_created", { name });
+    }
     Store.save(notes);
     form.reset();
     render();
@@ -154,6 +158,7 @@
 
     if (btn.dataset.action === "delete") {
       if (!confirm('Delete "' + n.name + '"?')) return;
+      if (window.ANALYTICS) ANALYTICS.logEvent("note_deleted", { name: n.name });
       notes = notes.filter(x => x.id !== id);
       if (editingId === id) {
         editingId = null;
@@ -205,3 +210,5 @@
   updateAuthUI();
   render();
 })();
+
+  if (window.ANALYTICS) ANALYTICS.trackPage("notes");

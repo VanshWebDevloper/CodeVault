@@ -194,15 +194,67 @@ body {
   background-color: #34353a;
 }
 
+/* Fluid sizing everywhere in between */
+.icon-grid {
+  grid-template-columns: repeat(auto-fill, minmax(72px, 90px));
+  justify-content: center;
+}
+
+.taskbar {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 60px;
+  padding: 8px 12px;
+  row-gap: 8px;
+}
+
+.taskbar-apps {
+  flex-wrap: wrap;
+}
+
 @media (max-width: 600px) {
   .icon-grid {
-    grid-template-columns: repeat(auto-fill, 70px);
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 74px));
+    gap: 10px;
+    padding: 20px 12px;
   }
 
   .app {
-    width: 70px;
-    height: 70px;
+    width: 74px;
+    height: 74px;
+  }
+
+  .app img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .search-box {
+    flex: 1 1 auto;
+    min-width: 140px;
+    order: -1;
+    width: auto;
+  }
+
+  .taskbar {
+    gap: 10px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .taskbar-apps img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .account-box button {
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .app {
+    width: 66px;
+    height: 66px;
   }
 
   .app img {
@@ -210,7 +262,7 @@ body {
     height: 30px;
   }
 
-  .search-box {
-    width: 140px;
+  .app span {
+    font-size: 10px;
   }
 }

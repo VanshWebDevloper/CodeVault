@@ -247,6 +247,24 @@ body {
   border-top: 1px solid #007acc;
 }
 
+.new-file-btn {
+  margin: 8px 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  background: #2a2d2e;
+  color: #cfcfcf;
+  border: 1px solid #3c3f41;
+  border-radius: 4px;
+  cursor: pointer;
+  width: calc(100% - 20px);
+  text-align: left;
+}
+
+.new-file-btn:hover {
+  background: #37393a;
+  color: #fff;
+}
+
 .tab .tab-close {
   opacity: 0.6;
   font-size: 12px;
