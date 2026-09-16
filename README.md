@@ -59,23 +59,30 @@ A file manager backed by a virtual filesystem that lives in your browser's local
 <!-- Anything you want to credit or mention? people, tools, tutorials? -->
 ​
 ## Folder layout
-​
+
 ```
 CodeVault/
-├── docs/
-│   ├── index.html           the desktop-style home screen
+├── docs/                     the whole web app (served by GitHub Pages)
+│   ├── index.html            the desktop-style home screen
 │   ├── main.css
-│   ├── index.js             app launcher, search, taskbar
-│   ├── apps/                the code editor, notes, and tasks apps etc.
-│   │   ├── code-editor.html
-│   │   ├── notes.html
-│   │   ├── tasks.html
-│   │   ├── js/              editor.js, notes.js, tasks.js etc.
-│   │   └── css/             editor.css, notes.css, tasks.css etc.
-│   └── assets/              wallpaper, icons, screenshots
-│       └── screenshots/     the images used in this readme
+│   ├── index.js              app launcher, search, taskbar
+│   ├── apps/
+│   │   ├── code-editor.html  the code editor app
+│   │   ├── notes.html        notes app
+│   │   ├── tasks.html        tasks app
+│   │   ├── terminal.html     terminal app
+│   │   ├── files.html        files app
+│   │   ├── analytics.html    analytics dashboard
+│   │   ├── js/               editor, notes, tasks, terminal, files, vfs, analytics
+│   │   ├── css/              styles for each app
+│   │   └── ...
+│   └── assets/               wallpaper, icons, screenshots
+├── server/                   Express server (static serving + API)
+│   ├── server.js
+│   └── database.js
+└── database/                 server-side data
 ```
-​
+
 ## Contributing
 ​
 Spotted something broken or have an idea? Open an issue, or fork the repo, make your branch, and send a pull request. I read everything.
