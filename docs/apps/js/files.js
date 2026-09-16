@@ -92,6 +92,9 @@
         const fullPath = (cwd === "/" ? "" : cwd) + "/" + node.name;
         if (confirm('Delete "' + node.name + '"?')) {
           VFS.remove(fullPath);
+          if (window.ANALYTICS) {
+            ANALYTICS.logEvent(node.type === "folder" ? "folder_deleted" : "file_deleted", { path: fullPath });
+          }
           render();
         }
       });
@@ -124,6 +127,9 @@
     const fullPath = (cwd === "/" ? "" : cwd) + "/" + name;
     const res = modalMode === "folder" ? VFS.mkdir(fullPath) : VFS.writeFile(fullPath, "");
     if (!res.ok) { modalError.textContent = res.error; return; }
+    if (window.ANALYTICS) {
+      ANALYTICS.logEvent(modalMode === "folder" ? "folder_created" : "file_created", { path: fullPath });
+    }
     closeModal();
     render();
   });
@@ -149,6 +155,7 @@
   fileViewCancel.addEventListener("click", () => { fileViewOverlay.hidden = true; viewingPath = null; });
 
   fileViewSave.addEventListener("click", () => {
+    if (window.ANALYTICS && viewingPath) ANALYTICS.logEvent("file_saved", { path: viewingPath });
     if (!viewingPath) return;
     const res = VFS.writeFile(viewingPath, fileViewContent.value);
     if (!res.ok) { fileViewError.textContent = res.error; return; }

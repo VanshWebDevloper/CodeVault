@@ -116,6 +116,7 @@
   /* ---------- Events ---------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    const wasEditing = !!editingId;
     const name = nameInput.value.trim();
     const body = bodyInput.value.trim();
     if (!name || !body) return;
@@ -141,6 +142,9 @@
       });
     }
 
+    if (window.ANALYTICS) {
+      ANALYTICS.logEvent(wasEditing ? "task_updated" : "task_created", { name });
+    }
     Store.save(tasks);
     form.reset();
     render();
@@ -156,6 +160,7 @@
 
     if (btn.dataset.action === "delete") {
       if (!confirm('Delete "' + t.name + '"?')) return;
+      if (window.ANALYTICS) ANALYTICS.logEvent("task_deleted", { name: t.name });
       tasks = tasks.filter(x => x.id !== id);
       if (editingId === id) {
         editingId = null;
@@ -170,6 +175,7 @@
     if (btn.dataset.action === "toggle") {
       t.done = !t.done;
       t.updatedAt = Date.now();
+      if (window.ANALYTICS) ANALYTICS.logEvent(t.done ? "task_completed" : "task_reopened", { name: t.name });
       Store.save(tasks);
       render();
     }
@@ -214,3 +220,5 @@
   updateAuthUI();
   render();
 })();
+
+  if (window.ANALYTICS) ANALYTICS.trackPage("tasks");

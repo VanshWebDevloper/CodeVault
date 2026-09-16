@@ -43,6 +43,33 @@ let openTabs = ["index.html", "style.css", "script.js"];
 let activeFile = "index.html";
 let cmInstance = null;
 
+// ---------- Workspace persistence ----------
+// Saved per user (same auth key every other app reads), so files survive reloads.
+const WORKSPACE_KEY = "coolzie_editor_workspace_" +
+  (localStorage.getItem("coolzie_current_user") || "guest");
+
+function loadWorkspace() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(WORKSPACE_KEY) || "null");
+    if (saved && saved.files && Object.keys(saved.files).length) {
+      for (const k of Object.keys(files)) delete files[k];
+      Object.assign(files, saved.files);
+      openTabs = saved.openTabs || Object.keys(files).slice(0, 1);
+      activeFile = saved.activeFile && files[saved.activeFile] ? saved.activeFile : Object.keys(files)[0];
+    }
+  } catch (e) { /* corrupted state -> fall back to defaults */ }
+}
+
+let saveTimer = null;
+function saveWorkspace() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(WORKSPACE_KEY, JSON.stringify({ files, openTabs, activeFile }));
+    } catch (e) { /* storage full or blocked; ignore */ }
+  }, 250);
+}
+
 const fileTreeEl = document.getElementById("file-tree");
 const tabBarEl = document.getElementById("tab-bar");
 const codespaceEl = document.getElementById("codespace");
@@ -53,7 +80,10 @@ const statusPos = document.getElementById("status-pos");
 const langLabels = {
   htmlmixed: "HTML",
   css: "CSS",
-  javascript: "JavaScript"
+  javascript: "JavaScript",
+  markdown: "Markdown",
+  python: "Python",
+  xml: "XML"
 };
 
 // ---------- Render file tree ----------
@@ -112,6 +142,7 @@ function closeTab(name) {
     codespaceEl.innerHTML = "";
   }
   renderFileTree();
+  saveWorkspace();
 }
 
 // ---------- Open a file into the editor ----------
@@ -121,6 +152,7 @@ function openFile(name) {
   renderTabs();
   renderFileTree();
   loadIntoEditor(name);
+  saveWorkspace();
 }
 
 function loadIntoEditor(name) {
@@ -139,11 +171,16 @@ function loadIntoEditor(name) {
     lineNumbers: document.getElementById("ext-minimap").checked,
     lineWrapping: document.getElementById("ext-wordwrap").checked,
     tabSize: 2,
-    autoCloseBrackets: true
+    autoCloseBrackets: true,
+    autoCloseTags: true,
+    matchBrackets: true,
+    styleActiveLine: true,
+    extraKeys: { "Ctrl-Space": "autocomplete" }
   });
 
-  cmInstance.on("change", () => {
+  cmInstance.on("change", (cm, changeObj) => {
     files[name].content = cmInstance.getValue();
+    saveWorkspace();
   });
 
   cmInstance.on("cursorActivity", () => {
@@ -157,7 +194,10 @@ function loadIntoEditor(name) {
 
 // ---------- Run: build a real HTML doc with CSS + JS injected, load into sandboxed iframe ----------
 function runProject() {
-  const html = files["index.html"] ? files["index.html"].content : "";
+  // If the active file is an HTML file, run that one; otherwise fall back to index.html
+  const activeIsHtml = activeFile && /\.html?$/i.test(activeFile) && files[activeFile];
+  const html = activeIsHtml ? activeIsHtml.content : (files["index.html"] ? files["index.html"].content : "");
+  if (html && window.ANALYTICS) ANALYTICS.logEvent("project_run", { file: activeIsHtml ? activeFile : "index.html" });
   const css = files["style.css"] ? files["style.css"].content : "";
   const js = files["script.js"] ? files["script.js"].content : "";
 
@@ -322,8 +362,12 @@ document.addEventListener("touchend", stopDragging);
 function langForFileName(name) {
   if (/\.html?$/i.test(name)) return "htmlmixed";
   if (/\.css$/i.test(name)) return "css";
-  if (/\.js$/i.test(name)) return "javascript";
-  return "javascript"; // closest available mode for plain text/unknown types
+  if (/\.(js|mjs)$/i.test(name)) return "javascript";
+  if (/\.json$/i.test(name)) return { name: "javascript", json: true };
+  if (/\.(md|markdown)$/i.test(name)) return "markdown";
+  if (/\.py$/i.test(name)) return "python";
+  if (/\.(xml|svg)$/i.test(name)) return "xml";
+  return "null"; // plain text for unknown types
 }
 
 function importFromFilesApp() {
@@ -347,7 +391,22 @@ function importFromFilesApp() {
   return true;
 }
 
+// ---------- New file ----------
+const newFileBtn = document.getElementById("new-file-btn");
+if (newFileBtn) {
+  newFileBtn.addEventListener("click", () => {
+    const name = prompt("New file name (with extension, e.g. script.js):");
+    if (!name || !name.trim()) return;
+    const trimmed = name.trim();
+    if (files[trimmed]) { alert("A file with that name already exists."); return; }
+    files[trimmed] = { lang: langForFileName(trimmed), content: "" };
+    if (window.ANALYTICS) ANALYTICS.logEvent("editor_file_created", { name: trimmed });
+    openFile(trimmed);
+  });
+}
+
 // ---------- Init ----------
+loadWorkspace();
 const openedFromFiles = importFromFilesApp();
 renderFileTree();
 renderTabs();
@@ -360,3 +419,5 @@ setTimeout(() => { if (cmInstance) cmInstance.refresh(); }, 150);
 window.addEventListener("orientationchange", () => {
   setTimeout(() => { if (cmInstance) cmInstance.refresh(); }, 200);
 });
+
+if (window.ANALYTICS) ANALYTICS.trackPage("code-editor");

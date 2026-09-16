@@ -13,7 +13,7 @@ It's still in progress, but it works. Open the live site and you get a desktop-s
 - A notes app for quick, no-friction notetaking
 - A tasks app for keeping track of what needs doing
 ​
-Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. The database side had help from AI, and so did some of the UI polish.
+Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. AI helped with the database side, the analytics tracking, some of the editor polish, and the responsiveness work.
 ​
 ## The apps
 ​
@@ -21,67 +21,68 @@ Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. The database side
 ​
 A small IDE-style editor: an explorer sidebar, tabs, a commands search, and a Run button that shows the output below the code pane. Write something, run it, see what happens.
 ​
-![Code Editor](public/assets/screenshots/code-editor.png)
+![Code Editor](docs/assets/screenshots/code-editor.png)
 ​
 ### Notes
 ​
 Simple and easy, note it down before it slips away. Search your notes by name, give one a title, write it, save it. Works without signing in too.
 ​
-![Notes](public/assets/screenshots/notes.png)
+![Notes](docs/assets/screenshots/notes.png)
 ​
 ### Tasks
 ​
 Add, remove, or edit your tasks. Same idea as Notes: search by name, give it a title, add the details, save. Keeps your day on track without the clutter.
 ​
-![Tasks](public/assets/screenshots/tasks.png)
+![Tasks](docs/assets/screenshots/tasks.png)
 ​
 ### Analytics
-​
-<!-- TODO: what will analytics show? charts, usage stats, study time? -->
-​
-Analytics is next on my list. The tile is on the desktop right now, the app itself is still being built.
-​
-![Analytics](public/assets/screenshots/analytics.png)
-​
+
+Real usage stats, tracked right in the browser. Every app logs events (notes created, tasks completed, commands run, files saved) and records how long you spend in each one, all stored per-account in localStorage. The dashboard shows total time tracked, notes created, tasks completed, commands run, a time-per-app breakdown, and activity over the last 7 days. Nothing leaves your machine.
+
+![Analytics](docs/assets/screenshots/analytics.png)
+
 ### Terminal
-​
-<!-- TODO: what should the terminal do? run commands, navigate the OS? -->
-​
-A terminal is planned, same deal. Tile's there, app is coming.
-​
-![Terminal](public/assets/screenshots/terminal.png)
-​
+
+A real terminal over the virtual filesystem. ls, cd, mkdir, touch, cat, echo > file, rm, mv, clear, whoami, date, history, reset-fs. Type `help` for the full list. What you do here changes the same files the Files app sees.
+
+![Terminal](docs/assets/screenshots/terminal.png)
+
 ### Files
-​
-<!-- TODO: describe what Files will manage once built -->
-​
-Files is planned as well, currently it's the tile on the right side of the desktop.
-​
-![Files](public/assets/screenshots/files.png)
-​
+
+A file manager backed by a virtual filesystem that lives in your browser's localStorage. Create folders and files, import files from your computer, and open any file straight in the code editor. Changes sync everywhere instantly.
+
+![Files](docs/assets/screenshots/files.png)
+
 <!-- TODO: these are yours to fill in: -->
 <!-- Why did you build CodeVault in your own words? (first section) -->
 <!-- What's the plan after Terminal and Files? add a "roadmap" section here -->
 <!-- Anything you want to credit or mention? people, tools, tutorials? -->
 ​
 ## Folder layout
-​
+
 ```
 CodeVault/
-├── public/
-│   ├── index.html           the desktop-style home screen
+├── docs/                     the whole web app (served by GitHub Pages)
+│   ├── index.html            the desktop-style home screen
 │   ├── main.css
-│   ├── index.js             app launcher, search, taskbar
-│   ├── apps/                the code editor, notes, and tasks apps etc.
-│   │   ├── code-editor.html
-│   │   ├── notes.html
-│   │   ├── tasks.html
-│   │   ├── js/              editor.js, notes.js, tasks.js etc.
-│   │   └── css/             editor.css, notes.css, tasks.css etc.
-│   └── assets/              wallpaper, icons, screenshots
-│       └── screenshots/     the images used in this readme
+│   ├── index.js              app launcher, search, taskbar
+│   ├── apps/
+│   │   ├── code-editor.html  the code editor app
+│   │   ├── notes.html        notes app
+│   │   ├── tasks.html        tasks app
+│   │   ├── terminal.html     terminal app
+│   │   ├── files.html        files app
+│   │   ├── analytics.html    analytics dashboard
+│   │   ├── js/               editor, notes, tasks, terminal, files, vfs, analytics
+│   │   ├── css/              styles for each app
+│   │   └── ...
+│   └── assets/               wallpaper, icons, screenshots
+├── server/                   Express server (static serving + API)
+│   ├── server.js
+│   └── database.js
+└── database/                 server-side data
 ```
-​
+
 ## Contributing
 ​
 Spotted something broken or have an idea? Open an issue, or fork the repo, make your branch, and send a pull request. I read everything.
