@@ -13,7 +13,7 @@ It's still in progress, but it works. Open the live site and you get a desktop-s
 - A notes app for quick, no-friction notetaking
 - A tasks app for keeping track of what needs doing
 ​
-Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. The database side had help from AI, and so did some of the UI polish.
+Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. AI helped with the database side, the analytics tracking, some of the editor polish, and the responsiveness work.
 ​
 ## The apps
 ​
