@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics — Coolzie Web OS</title>
+<link rel="stylesheet" href="css/analytics.css">
+</head>
+<body>
+
+  <main class="analytics-app">
+
+    <header class="top">
+      <div>
+        <h1>Analytics</h1>
+        <p class="tagline">Your real usage across Coolzie OS, tracked on this device.</p>
+      </div>
+      <button type="button" id="resetBtn">Reset stats</button>
+    </header>
+
+    <section class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total time tracked</span>
+        <span class="stat-value" id="statTotalTime">0m</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Notes created</span>
+        <span class="stat-value" id="statNotesCreated">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Tasks completed</span>
+        <span class="stat-value" id="statTasksCompleted">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Commands run</span>
+        <span class="stat-value" id="statCommandsRun">0</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Time by app</h2>
+      <div id="timeByApp" class="bar-list"></div>
+      <p class="empty-note" id="timeByAppEmpty" hidden>No app usage tracked yet. Open Notes, Tasks, Terminal, Files, or the Code Editor to start tracking.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Activity, last 7 days</h2>
+      <div id="dailyActivity" class="bar-list"></div>
+      <p class="empty-note" id="dailyActivityEmpty" hidden>No activity in the last 7 days.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Top terminal commands</h2>
+      <div id="topCommands" class="bar-list"></div>
+      <p class="empty-note" id="topCommandsEmpty" hidden>No terminal commands run yet.</p>
+    </section>
+
+    <p class="storage-note">
+      Stats are calculated from real activity on this browser, under your current account name.
+      Nothing is sent anywhere yet — this is local-only until a backend exists to sync it.
+    </p>
+
+  </main>
+
+  <script src="js/analytics.js"></script>
+  <script src="js/analytics-app.js"></script>
+</body>
+</html>

@@ -316,7 +316,39 @@ document.addEventListener("touchmove", e => {
 
 document.addEventListener("touchend", stopDragging);
 
+// ---------- Files app handoff ----------
+// If the Files app sent a file over (via sessionStorage), open it here.
+// Additive only: doesn't touch the default index.html/style.css/script.js set.
+function langForFileName(name) {
+  if (/\.html?$/i.test(name)) return "htmlmixed";
+  if (/\.css$/i.test(name)) return "css";
+  if (/\.js$/i.test(name)) return "javascript";
+  return "javascript"; // closest available mode for plain text/unknown types
+}
+
+function importFromFilesApp() {
+  const path = sessionStorage.getItem("coolzie_editor_open_path");
+  if (!path) return false;
+
+  const content = sessionStorage.getItem("coolzie_editor_open_content") || "";
+  const name = path.split("/").filter(Boolean).pop() || "untitled.txt";
+
+  files[name] = {
+    lang: langForFileName(name),
+    content: content,
+    vfsPath: path // remembered so a future "save back to Files" action knows where it came from
+  };
+
+  if (!openTabs.includes(name)) openTabs.push(name);
+  activeFile = name;
+
+  sessionStorage.removeItem("coolzie_editor_open_path");
+  sessionStorage.removeItem("coolzie_editor_open_content");
+  return true;
+}
+
 // ---------- Init ----------
+const openedFromFiles = importFromFilesApp();
 renderFileTree();
 renderTabs();
 loadIntoEditor(activeFile);

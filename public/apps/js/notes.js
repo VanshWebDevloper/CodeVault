@@ -8,7 +8,7 @@
      Notes are namespaced per "account name" so the storage model
      already matches what per-user data will look like later.
   */
-  const AUTH_KEY = "notes_app_current_user";
+  const AUTH_KEY = "coolzie_current_user";
 
   const AUTH = {
     getCurrentUser() {

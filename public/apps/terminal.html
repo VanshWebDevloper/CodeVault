@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terminal — Coolzie OS</title>
+<link rel="stylesheet" href="css/terminal.css">
+</head>
+<body>
+
+  <div class="term-window">
+    <div class="term-titlebar">
+      <span class="term-dots"><i></i><i></i><i></i></span>
+      <span class="term-title" id="termTitle">guest@coolzie:~</span>
+    </div>
+    <div class="term-body" id="termBody">
+      <div class="term-log" id="termLog"></div>
+      <div class="term-input-row">
+        <span class="term-prompt" id="termPrompt">guest@coolzie:/home$</span>
+        <input type="text" id="termInput" autocomplete="off" spellcheck="false" autofocus>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vfs.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/terminal.js"></script>
+</body>
+</html>

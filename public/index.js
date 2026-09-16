@@ -111,3 +111,45 @@ function updateClock() {
 
 updateClock();
 setInterval(updateClock, 60000);
+
+// ---------- Account (placeholder sign-in/up) ----------
+// This does not verify passwords or talk to a server yet. It just sets
+// the shared "current user" key that every app (VFS, Terminal, Notes,
+// Tasks) reads to namespace its own saved data. Swap this for a real
+// auth flow later without touching those apps: they only ever read
+// this same key from localStorage.
+var ACCOUNT_KEY = "coolzie_current_user";
+
+var accountLabel = document.getElementById("accountLabel");
+var accountBtn = document.getElementById("accountBtn");
+
+function getCurrentAccount() {
+  return localStorage.getItem(ACCOUNT_KEY) || null;
+}
+
+function updateAccountUI() {
+  var user = getCurrentAccount();
+  if (user) {
+    accountLabel.textContent = user;
+    accountBtn.textContent = "Sign out";
+  } else {
+    accountLabel.textContent = "Guest";
+    accountBtn.textContent = "Sign in";
+  }
+}
+
+accountBtn.addEventListener("click", function () {
+  if (getCurrentAccount()) {
+    localStorage.removeItem(ACCOUNT_KEY);
+  } else {
+    var name = prompt("Placeholder sign-in / sign-up \u2014 enter any name:");
+    if (name && name.trim()) {
+      localStorage.setItem(ACCOUNT_KEY, name.trim());
+    } else {
+      return;
+    }
+  }
+  updateAccountUI();
+});
+
+updateAccountUI();

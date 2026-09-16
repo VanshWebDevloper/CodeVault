@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Files — Coolzie OS</title>
+<link rel="stylesheet" href="css/files.css">
+</head>
+<body>
+
+  <div class="files-app">
+
+    <header class="files-header">
+      <div class="path-bar" id="pathBar"></div>
+      <div class="header-actions">
+        <button type="button" id="newFolderBtn">New folder</button>
+        <button type="button" id="newFileBtn">New file</button>
+        <button type="button" id="importBtn">Import</button>
+        <input type="file" id="importInput" accept=".json,.txt" hidden>
+      </div>
+    </header>
+
+    <div class="files-grid" id="filesGrid"></div>
+
+    <div class="empty-hint" id="emptyHint" hidden>This folder is empty.</div>
+
+    <p class="footer-hint">Click to open · double-click to export as .json</p>
+
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal">
+      <h3 id="modalTitle">New item</h3>
+      <input type="text" id="modalInput" autocomplete="off">
+      <p class="modal-error" id="modalError"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel">Cancel</button>
+        <button type="button" class="primary" id="modalConfirm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="fileViewOverlay" hidden>
+    <div class="modal modal-wide">
+      <h3 id="fileViewTitle">file.txt</h3>
+      <textarea id="fileViewContent" spellcheck="false"></textarea>
+      <p class="modal-error" id="fileViewError"></p>
+      <div class="modal-actions">
+        <button type="button" id="openInEditorBtn">Open in Code Editor</button>
+        <button type="button" id="fileViewCancel">Close</button>
+        <button type="button" class="primary" id="fileViewSave">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vfs.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/files.js"></script>
+</body>
+</html>
