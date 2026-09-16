@@ -36,13 +36,11 @@ Add, remove, or edit your tasks. Same idea as Notes: search by name, give it a t
 ![Tasks](public/assets/screenshots/tasks.png)
 ​
 ### Analytics
-​
-<!-- TODO: what will analytics show? charts, usage stats, study time? -->
-​
-Analytics is next on my list. The tile is on the desktop right now, the app itself is still being built.
-​
+
+Real usage stats, tracked right in the browser. Every app logs events (notes created, tasks completed, commands run, files saved) and records how long you spend in each one, all stored per-account in localStorage. The dashboard shows total time tracked, notes created, tasks completed, commands run, a time-per-app breakdown, and activity over the last 7 days. Nothing leaves your machine.
+
 ![Analytics](public/assets/screenshots/analytics.png)
-​
+
 ### Terminal
 ​
 <!-- TODO: what should the terminal do? run commands, navigate the OS? -->
