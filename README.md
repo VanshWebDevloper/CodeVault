@@ -21,42 +21,38 @@ Nothing fancy under the hood. Plain HTML, CSS, and JavaScript. AI helped with th
 ​
 A small IDE-style editor: an explorer sidebar, tabs, a commands search, and a Run button that shows the output below the code pane. Write something, run it, see what happens.
 ​
-![Code Editor](public/assets/screenshots/code-editor.png)
+![Code Editor](docs/assets/screenshots/code-editor.png)
 ​
 ### Notes
 ​
 Simple and easy, note it down before it slips away. Search your notes by name, give one a title, write it, save it. Works without signing in too.
 ​
-![Notes](public/assets/screenshots/notes.png)
+![Notes](docs/assets/screenshots/notes.png)
 ​
 ### Tasks
 ​
 Add, remove, or edit your tasks. Same idea as Notes: search by name, give it a title, add the details, save. Keeps your day on track without the clutter.
 ​
-![Tasks](public/assets/screenshots/tasks.png)
+![Tasks](docs/assets/screenshots/tasks.png)
 ​
 ### Analytics
 
 Real usage stats, tracked right in the browser. Every app logs events (notes created, tasks completed, commands run, files saved) and records how long you spend in each one, all stored per-account in localStorage. The dashboard shows total time tracked, notes created, tasks completed, commands run, a time-per-app breakdown, and activity over the last 7 days. Nothing leaves your machine.
 
-![Analytics](public/assets/screenshots/analytics.png)
+![Analytics](docs/assets/screenshots/analytics.png)
 
 ### Terminal
-​
-<!-- TODO: what should the terminal do? run commands, navigate the OS? -->
-​
-A terminal is planned, same deal. Tile's there, app is coming.
-​
-![Terminal](public/assets/screenshots/terminal.png)
-​
+
+A real terminal over the virtual filesystem. ls, cd, mkdir, touch, cat, echo > file, rm, mv, clear, whoami, date, history, reset-fs. Type `help` for the full list. What you do here changes the same files the Files app sees.
+
+![Terminal](docs/assets/screenshots/terminal.png)
+
 ### Files
-​
-<!-- TODO: describe what Files will manage once built -->
-​
-Files is planned as well, currently it's the tile on the right side of the desktop.
-​
-![Files](public/assets/screenshots/files.png)
-​
+
+A file manager backed by a virtual filesystem that lives in your browser's localStorage. Create folders and files, import files from your computer, and open any file straight in the code editor. Changes sync everywhere instantly.
+
+![Files](docs/assets/screenshots/files.png)
+
 <!-- TODO: these are yours to fill in: -->
 <!-- Why did you build CodeVault in your own words? (first section) -->
 <!-- What's the plan after Terminal and Files? add a "roadmap" section here -->
@@ -66,7 +62,7 @@ Files is planned as well, currently it's the tile on the right side of the deskt
 ​
 ```
 CodeVault/
-├── public/
+├── docs/
 │   ├── index.html           the desktop-style home screen
 │   ├── main.css
 │   ├── index.js             app launcher, search, taskbar
