@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeVault</title>
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="desktop">
+
+    <div class="icon-grid" id="iconGrid">
+
+      <div class="app" data-name="Code Editor" data-type="link" data-url="apps/code-editor.html">
+        <img src="assets/icons/code-editor.svg" alt="">
+        <span>Code Editor</span>
+      </div>
+
+      <div class="app" data-name="Git" data-type="link" data-url="https://git-scm.com">
+        <img src="assets/icons/git.svg" alt="">
+        <span>Git</span>
+      </div>
+
+      <div class="app" data-name="GitHub" data-type="link" data-url="https://github.com">
+        <img src="assets/icons/github.svg" alt="">
+        <span>GitHub</span>
+      </div>
+
+      <div class="app" data-name="Learning" data-type="none">
+        <img src="assets/icons/learning.svg" alt="">
+        <span>Learning</span>
+      </div>
+
+      <div class="app" data-name="Notes" data-type="link" data-url="apps/notes.html">
+        <img src="assets/icons/notes.svg" alt="">
+        <span>Notes</span>
+      </div>
+
+      <div class="app" data-name="Projects" data-type="link" data-url="apps/files.html">
+        <img src="assets/icons/files.svg" alt="">
+        <span>Files</span>
+      </div>
+
+      <div class="app" data-name="Slack" data-type="link" data-url="https://slack.com">
+        <img src="assets/icons/slack.svg" alt="">
+        <span>Slack</span>
+      </div>
+
+      <div class="app" data-name="Task" data-type="link" data-url="apps/tasks.html">
+        <img src="assets/icons/task.svg" alt="">
+        <span>Task</span>
+      </div>
+
+      <div class="app" data-name="Terminal" data-type="link" data-url="apps/terminal.html">
+        <img src="assets/icons/terminal.svg" alt="">
+        <span>Terminal</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="taskbar">
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search apps">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <div class="taskbar-apps" id="taskbarApps">
+      <img src="assets/icons/terminal.svg" alt="Terminal" data-target="Terminal">
+      <img src="assets/icons/notes.svg" alt="Notes" data-target="Notes">
+      <img src="assets/icons/github.svg" alt="GitHub" data-target="GitHub">
+      <img src="assets/icons/slack.svg" alt="Slack" data-target="Slack">
+      <img src="assets/icons/files.svg" alt="Projects" data-target="Projects">
+    </div>
+
+    <div class="account-box" id="accountBox">
+      <span class="account-label" id="accountLabel">Guest</span>
+      <button type="button" id="accountBtn">Sign in</button>
+    </div>
+
+    <div class="clock" id="clock">00:00</div>
+
+  </div>
+
+  <script src="index.js"></script>
+</body>
+        </html>
+        
