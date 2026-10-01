@@ -31,7 +31,10 @@
 
       <!-- File explorer -->
       <div class="sidebar" id="sidebar">
-        <div class="sidebar-title">Explorer</div>
+        <div class="sidebar-title">
+          Explorer
+          <button id="new-file-btn" class="new-file-btn" title="New file">+</button>
+        </div>
         <ul class="file-tree" id="file-tree">
           <!-- filled by js -->
         </ul>
@@ -93,12 +96,17 @@
 
   </div>
 
+  <!-- Shared virtual filesystem (same one Files and Terminal use) -->
+  <script src="js/vfs.js"></script>
+
   <!-- CodeMirror core + language modes -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
 
   <script src="js/editor.js"></script>
 </body>
